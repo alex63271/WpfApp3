@@ -1,0 +1,28 @@
+﻿<Window x:Class="WpfApp3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3"
+        mc:Ignorable="d"
+        Title="MainWindow" >
+    <Grid>
+        <StackPanel>
+            <Button Width="100" Height="50"  Content="Нажми" Click="Button_Click" />
+            <Grid Margin="0 0 0 20" Height="215" >
+
+                <DataGrid x:Name="h1" Margin="0,58,0,-66" CanUserAddRows="False" CanUserSortColumns="True" IsReadOnly="True" RowBackground="#ebebeb" >
+                    <DataGrid.Columns >
+                        <DataGridTextColumn Header="Федералка" Binding ="{Binding ds.Tables[0]}"/>
+                        <DataGridTextColumn Header="Рег. номер" Binding ="{Binding ds }"/>
+                        <DataGridTextColumn Header="ФИО" Binding ="{Binding ds}"/>
+                    </DataGrid.Columns>
+
+
+
+                </DataGrid>
+            </Grid>
+
+        </StackPanel>
+    </Grid>
+</Window>

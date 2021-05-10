@@ -33,7 +33,7 @@ namespace WpfApp3
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             string connectionString = "server=localhost;user id=enot;persistsecurityinfo=True;database=enotdb;allowuservariables=True;Password=ctccblecz"; //строка подключения
             string sql = "SELECT ID , IDMU , CONCAT (NAME, \' \' , surname) as ФИО from Notaries";  // sql-запрос
@@ -47,20 +47,15 @@ namespace WpfApp3
                     using (DataSet ds = new DataSet())  //создаем объект - кэш для хранения данных из БД
                     {
                         
-                        adapter.FillAsync(ds);  // метод адаптера заполняет кэш
+                        await adapter.FillAsync(ds);  // метод адаптера заполняет кэш
                                                 // Отображаем данные
 
                         //ds.Tables[0].Columns[0].ColumnName; //имя первого столбца в таблице №1 в коллекции ds.Tables
                         //ds.Tables[0].Rows[0].ItemArray[0]; // значение первой ячейки первой строки
-                        // h1.Columns.Clear();
+                       
 
                         h1.ItemsSource = ds.Tables[0].DefaultView;  //читаем из кэша таблицу и запысываем ее в datagrid
-                                                                    //string[] Array = new string[ds.Tables[0].Rows.Count]; 
-
-                        //for (int i=0; i<ds.Tables[0].Rows.Count;++i)
-                        //{
-                        //    Array[i] = ds.Tables[0].Rows[i].ItemArray[0].ToString();
-                        //}
+                                                                   
                         
                     }
                 }

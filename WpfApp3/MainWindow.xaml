@@ -8,14 +8,16 @@
         Title="MainWindow" >
     <Grid>
         <StackPanel>
-            <Button Width="100" Height="50"  Content="Нажми" Click="Button_Click" />
+            <Button Height="50"  Content="Загрузить данные" Click="Button_Click" Margin="307,0,338,0" />
             <Grid Margin="0 0 0 20" Height="215" >
 
-                <DataGrid x:Name="h1" Margin="0,58,0,-66" CanUserAddRows="False"  IsReadOnly="True" RowBackground="#ebebeb"  HeadersVisibility="Column">
+                <DataGrid x:Name="h1" Margin="10,58,10,-66" CanUserAddRows="False"  IsReadOnly="True" RowBackground="#ebebeb"  HeadersVisibility="Column" AutoGenerateColumns="False">
                     <DataGrid.Columns >
-                        <DataGridTextColumn Header="Федералка" />
-                        <DataGridTextColumn Header="Рег. номер"/>
-                        <DataGridTextColumn Header="ФИО"/>
+                        <DataGridTextColumn x:Name="st1" Header="Федералка" Binding= "{Binding Path= Федералка  }" />
+
+                        <DataGridTextColumn x:Name="st2" Header="Рег. номер" Binding= "{Binding Path= номер}" />
+
+                        <DataGridTextColumn x:Name="st3" Header="ФИО" Binding= "{Binding Path=ФИО}" />
                     </DataGrid.Columns>
 
 

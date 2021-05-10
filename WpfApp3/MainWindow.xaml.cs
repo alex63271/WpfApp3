@@ -25,14 +25,18 @@ namespace WpfApp3
         public MainWindow()
         {
             InitializeComponent();
+            //Binding binding = new Binding();
 
-            
+            //binding.ElementName = "ds.Tables[0]"; // элемент-источник
+            //binding.Path = new PropertyPath("Columns[0].ColumnName"); // свойство элемента-источника
+            //h1.SetBinding(st1, binding); // установка привязки для элемента-приемника
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string connectionString = "server=localhost;user id=enot;persistsecurityinfo=True;database=enotdb;allowuservariables=True;Password=ctccblecz"; //строка подключения
-            string sql = "SELECT ID as Федералка, IDMU as \"Рег. номер\", CONCAT (NAME, \" \" , surname) AS ФИО from Notaries";  // sql-запрос
+            string sql = "SELECT ID as Федералка, IDMU as номер, CONCAT (NAME, \' \' , surname) AS ФИО from Notaries";  // sql-запрос
             using (MySqlConnection connection = new MySqlConnection(connectionString))  //создаем объект подключения к mysql
             {
                 // Создаем объект DataAdapter
@@ -44,14 +48,20 @@ namespace WpfApp3
                     {
                         
                         adapter.FillAsync(ds);  // метод адаптера заполняет кэш
-                        // Отображаем данные
+                                                // Отображаем данные
 
                         //ds.Tables[0].Columns[0].ColumnName; //имя первого столбца в таблице №1 в коллекции ds.Tables
                         //ds.Tables[0].Rows[0].ItemArray[0]; // значение первой ячейки первой строки
-                        h1.Columns.Clear();
+                        // h1.Columns.Clear();
 
-                        h1.ItemsSource = ds.Tables[0].DefaultView;  //читаем из кэша стоблцы и строки
+                        h1.ItemsSource = ds.Tables[0].DefaultView;  //читаем из кэша таблицу и запысываем ее в datagrid
+                                                                    //string[] Array = new string[ds.Tables[0].Rows.Count]; 
 
+                        //for (int i=0; i<ds.Tables[0].Rows.Count;++i)
+                        //{
+                        //    Array[i] = ds.Tables[0].Rows[i].ItemArray[0].ToString();
+                        //}
+                        
                     }
                 }
                

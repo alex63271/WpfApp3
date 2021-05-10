@@ -32,7 +32,7 @@ namespace WpfApp3
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string connectionString = "server=localhost;user id=enot;persistsecurityinfo=True;database=enotdb;allowuservariables=True;Password=ctccblecz"; //строка подключения
-            string sql = "SELECT ID as федералка, IDMU as номер, CONCAT (NAME, \" \" , surname) AS ФИО from Notaries";  // sql-запрос
+            string sql = "SELECT ID as Федералка, IDMU as \"Рег. номер\", CONCAT (NAME, \" \" , surname) AS ФИО from Notaries";  // sql-запрос
             using (MySqlConnection connection = new MySqlConnection(connectionString))  //создаем объект подключения к mysql
             {
                 // Создаем объект DataAdapter
@@ -48,7 +48,7 @@ namespace WpfApp3
 
                         //ds.Tables[0].Columns[0].ColumnName; //имя первого столбца в таблице №1 в коллекции ds.Tables
                         //ds.Tables[0].Rows[0].ItemArray[0]; // значение первой ячейки первой строки
-
+                        h1.Columns.Clear();
 
                         h1.ItemsSource = ds.Tables[0].DefaultView;  //читаем из кэша стоблцы и строки
 

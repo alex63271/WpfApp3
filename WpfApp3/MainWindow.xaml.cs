@@ -31,25 +31,29 @@ namespace WpfApp3
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string connectionString = "server=localhost;user id=enot;persistsecurityinfo=True;database=enotdb;allowuservariables=True;Password=ctccblecz";
-            string sql = "SELECT ID as федералка, IDMU as номер, CONCAT (NAME, \" \" , surname) AS ФИО from Notaries";
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            string connectionString = "server=localhost;user id=enot;persistsecurityinfo=True;database=enotdb;allowuservariables=True;Password=ctccblecz"; //строка подключения
+            string sql = "SELECT ID as федералка, IDMU as номер, CONCAT (NAME, \" \" , surname) AS ФИО from Notaries";  // sql-запрос
+            using (MySqlConnection connection = new MySqlConnection(connectionString))  //создаем объект подключения к mysql
             {
                 // Создаем объект DataAdapter
-                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, connection);
-                // Создаем объект DataSet
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(sql, connection))    //создаем адаптер из подключения mysql для заполнения кэша dataset
+                {
+                    // Создаем объект DataSet
 
-                DataSet ds = new DataSet();
-                // Заполняем Dataset
-                adapter.FillAsync(ds);
-                // Отображаем данные
+                    using (DataSet ds = new DataSet())  //создаем объект - кэш для хранения данных из БД
+                    {
+                        
+                        adapter.FillAsync(ds);  // метод адаптера заполняет кэш
+                        // Отображаем данные
 
-                //ds.Tables[0].Columns[0].ColumnName; //имя первого столбца в таблице №1 в коллекции ds.Tables
-                //ds.Tables[0].Rows[0].ItemArray[0]; // значение первой ячейки первой строки
+                        //ds.Tables[0].Columns[0].ColumnName; //имя первого столбца в таблице №1 в коллекции ds.Tables
+                        //ds.Tables[0].Rows[0].ItemArray[0]; // значение первой ячейки первой строки
 
-               
-                h1.ItemsSource = ds.Tables[0].DefaultView;
-            
+
+                        h1.ItemsSource = ds.Tables[0].DefaultView;  //читаем из кэша стоблцы и строки
+
+                    }
+                }
                
       
             }

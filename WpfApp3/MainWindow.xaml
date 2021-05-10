@@ -13,9 +13,9 @@
 
                 <DataGrid x:Name="h1" Margin="10,58,10,-66" CanUserAddRows="False"  IsReadOnly="True" RowBackground="#ebebeb"  HeadersVisibility="Column" AutoGenerateColumns="False">
                     <DataGrid.Columns >
-                        <DataGridTextColumn x:Name="st1" Header="Федералка" Binding= "{Binding Path= Федералка  }" />
+                        <DataGridTextColumn x:Name="st1" Header="Федералка" Binding= "{Binding Path= ID  }" />
 
-                        <DataGridTextColumn x:Name="st2" Header="Рег. номер" Binding= "{Binding Path= номер}" />
+                        <DataGridTextColumn x:Name="st2" Header="Рег. номер" Binding= "{Binding Path= IDMU}" />
 
                         <DataGridTextColumn x:Name="st3" Header="ФИО" Binding= "{Binding Path=ФИО}" />
                     </DataGrid.Columns>

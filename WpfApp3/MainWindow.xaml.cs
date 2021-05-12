@@ -36,7 +36,7 @@ namespace WpfApp3
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             string connectionString = "server=localhost;user id=enot;persistsecurityinfo=True;database=enotdb;allowuservariables=True;Password=ctccblecz"; //строка подключения
-            string sql = "SELECT ID , IDMU , CONCAT (NAME, \' \' , surname) as ФИО from Notaries";  // sql-запрос
+            string sql = "SELECT ID , ADRES , CONCAT (NAME, \' \' , surname) as ФИО from Notaries";  // sql-запрос
             using (MySqlConnection connection = new MySqlConnection(connectionString))  //создаем объект подключения к mysql
             {
                 // Создаем объект DataAdapter

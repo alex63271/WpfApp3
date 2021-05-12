@@ -36,7 +36,7 @@ namespace WpfApp3
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             string connectionString = "server=localhost;user id=enot;persistsecurityinfo=True;database=enotdb;allowuservariables=True;Password=ctccblecz"; //строка подключения
-            string sql = "SELECT ID , ADRES , CONCAT (NAME, \' \' , surname) as ФИО from Notaries";  // sql-запрос
+            string sql = "SELECT RID, ID , ADRES , CONCAT (NAME, \' \' , surname) as ФИО from Notaries";  // sql-запрос
             using (MySqlConnection connection = new MySqlConnection(connectionString))  //создаем объект подключения к mysql
             {
                 // Создаем объект DataAdapter
@@ -48,13 +48,54 @@ namespace WpfApp3
                     {
                         
                         await adapter.FillAsync(ds);  // метод адаптера заполняет кэш
-                                                // Отображаем данные
+                                                      // Отображаем данные
 
                         //ds.Tables[0].Columns[0].ColumnName; //имя первого столбца в таблице №1 в коллекции ds.Tables
                         //ds.Tables[0].Rows[0].ItemArray[0]; // значение первой ячейки первой строки
-                       
 
-                        h1.ItemsSource = ds.Tables[0].DefaultView;  //читаем из кэша таблицу и запысываем ее в datagrid
+
+                        DataTable dt = ds.Tables[0];    //создание объекта - таблицы и записываем в нее значение из кэша
+                        
+                        DataRow newRow = dt.NewRow();   //создание строки на основе таблицы dt
+                        newRow["ID"] = "12345678";    //записываем в столбец Name значение Rick
+                        newRow["ADRES"] = "какой-то адрес";
+                        newRow["RID"] = "9F9E5873EACBAA4089D8E8FB133D0AF3";
+                        dt.Rows.Add(newRow);    //добавляем в таблицу созданную строку
+
+                        // Изменим значение в столбце Age для первой строки
+                        dt.Rows[0]["ID"] = "98765432";
+
+                        // создаем объект SqlCommandBuilder
+                        using (MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(adapter))
+                        {
+                            adapter.Update(ds);
+                            // альтернативный способ - обновление только одной таблицы
+                            //adapter.Update(dt);
+                            // заново получаем данные из бд
+                            // очищаем полностью DataSet
+                            ds.Clear();
+                            // перезагружаем данные
+                            adapter.Fill(ds);
+
+
+
+                            h1.ItemsSource = ds.Tables[0].DefaultView;  //читаем из кэша таблицу и запысываем ее в datagrid
+
+
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+                       // h1.ItemsSource = ds.Tables[0].DefaultView;  //читаем из кэша таблицу и запысываем ее в datagrid
                                                                    
                         
                     }

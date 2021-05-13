@@ -59,16 +59,17 @@ namespace WpfApp3
                         DataRow newRow = dt.NewRow();   //создание строки на основе таблицы dt
                         newRow["ID"] = "12345678";    //записываем в столбец Name значение Rick
                         newRow["ADRES"] = "какой-то адрес";
-                        newRow["RID"] = "9F9E5873EACBAA4089D8E8FB133D0AF3";
+                        newRow["RID"] = Guid.NewGuid().ToString("N").ToUpper();      //ключевое поле
                         dt.Rows.Add(newRow);    //добавляем в таблицу созданную строку
 
-                        // Изменим значение в столбце Age для первой строки
+                        // Изменим значение в столбце ID для первой строки
                         dt.Rows[0]["ID"] = "98765432";
 
                         // создаем объект SqlCommandBuilder
                         using (MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(adapter))
                         {
-                            adapter.Update(ds);
+                            await adapter.UpdateAsync(ds);  // отправляем кэш dataset в БД
+
                             // альтернативный способ - обновление только одной таблицы
                             //adapter.Update(dt);
 

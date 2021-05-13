@@ -71,11 +71,13 @@ namespace WpfApp3
                             adapter.Update(ds);
                             // альтернативный способ - обновление только одной таблицы
                             //adapter.Update(dt);
+
+
                             // заново получаем данные из бд
-                            // очищаем полностью DataSet
-                            ds.Clear();
-                            // перезагружаем данные
-                            adapter.Fill(ds);
+                            
+                            ds.Clear();     // очищаем полностью DataSet
+                                            
+                            await adapter.FillAsync(ds);    // перезагружаем данные
 
 
 
@@ -83,15 +85,6 @@ namespace WpfApp3
 
 
                         }
-
-
-
-
-
-
-
-
-
 
 
 

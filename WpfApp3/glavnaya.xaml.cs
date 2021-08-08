@@ -25,8 +25,8 @@ namespace WpfApp3
         public glavnaya()
         {
             InitializeComponent();
-            string connectionString = "server=localhost;user id=enot;persistsecurityinfo=True;database=enotdb;allowuservariables=True;Password=ctccblecz"; //строка подключения
-            string sql = "SELECT ID , IDMU , CONCAT (NAME, \' \' , surname) as ФИО from Notaries";  // sql-запрос
+            string connectionString = "server=localhost;user id=enot;persistsecurityinfo=True;database=TestRUZDI;allowuservariables=True;Password=ctccblecz"; //строка подключения
+            string sql = "SELECT RID, ID , IDMU , CONCAT (NAME, \' \' , surname) as ФИО from Person";  // sql-запрос
             using (MySqlConnection connection = new MySqlConnection(connectionString))  //создаем объект подключения к mysql
             {
                 // Создаем объект DataAdapter
@@ -38,15 +38,32 @@ namespace WpfApp3
                     {
 
                          adapter.FillAsync(ds);  // метод адаптера заполняет кэш
-                                                      // Отображаем данные
+                                                 // Отображаем данные
 
                         //ds.Tables[0].Columns[0].ColumnName; //имя первого столбца в таблице №1 в коллекции ds.Tables
                         //ds.Tables[0].Rows[0].ItemArray[0]; // значение первой ячейки первой строки
 
+                        //MessageBox.Show(Guid.NewGuid().ToString("N").ToUpper());
+                       // h1.ItemsSource = ds.Tables[0].DefaultView;  //читаем из кэша таблицу и запысываем ее в datagrid
 
-                        h1.ItemsSource = ds.Tables[0].DefaultView;  //читаем из кэша таблицу и запысываем ее в datagrid
+                        DataTable dt = ds.Tables[0]; // создаем объект таблицы на основе кэша
+                        // добавим новую строку
+                        DataRow newRow = dt.NewRow();   //создаем объект новой записи в таблице dt
+                        newRow["RID"] = Guid.NewGuid().ToString("N").ToUpper();
+                        newRow["ID"] = 94200165;
+                        dt.Rows.Add(newRow);    //добавляем запись в таблицу на основе созданного ранее объекта
 
+                        // Изменим значение в столбце Age для первой строки
+                        //dt.Rows[0]["Age"] = 17;
 
+                        // создаем объект SqlCommandBuilder
+                        MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(adapter);
+                        adapter.Update(ds);
+
+                        ds.Clear();
+                        // перезагружаем данные
+                        adapter.FillAsync(ds);
+                        h1.ItemsSource = ds.Tables[0].DefaultView;
                     }
                 }
 
@@ -59,9 +76,6 @@ namespace WpfApp3
             NavigationService.Navigate(new aplicant());
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
     }
 }

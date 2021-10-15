@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<RegistrationCertificate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="2.3" xmlns="http://fciit.ru/eisn/ruzdi/types/2.3">
+  <RegistrationCertificateId>ca770750-7edc-548c-e053-04e0c80a0a1c</RegistrationCertificateId>
+  <NotificationId>ca770750-7edc-548c-e053-04e0c80a0a1c</NotificationId>
+  <RegistrationCertificateData version="2.3">
+    <NotificationReferenceNumber>2021-003-505464-098</NotificationReferenceNumber>
+    <RegistrationTime>2021-08-26T17:25:20</RegistrationTime>
+    <NotificationData version="2.3">
+      <FormUZ1>
+        <PersonalProperties>
+          <PersonalProperty>
+            <OtherProperty>
+              <ID>0</ID>
+              <Description>Иное имущество</Description>
+            </OtherProperty>
+          </PersonalProperty>
+        </PersonalProperties>
+        <Pledgors>
+          <Pledgor>
+            <PrivatePerson>
+              <Name>
+                <Last>Абдразяков</Last>
+                <First>Энвяр</First>
+                <Middle>Ряхимович</Middle>
+              </Name>
+              <BirthDate>1982-10-21</BirthDate>
+              <PersonDocument>
+                <Code>21</Code>
+                <Name>Паспорт гражданина Российской Федерации (для гражданина Российской Федерации, достигшего 14 лет)</Name>
+                <SeriesNumber>63 03 659491</SeriesNumber>
+              </PersonDocument>
+              <PersonAddress>
+                <AddressRF registration="true">
+                  <RegionCode>64</RegionCode>
+                  <Region>Саратовская обл</Region>
+                  <City>Саратов</City>
+                  <Street>Тверская ул</Street>
+                  <House>40</House>
+                  <Apartment>75</Apartment>
+                </AddressRF>
+              </PersonAddress>
+            </PrivatePerson>
+          </Pledgor>
+        </Pledgors>
+        <Pledgee>
+          <Pledgee>
+            <Organization>
+              <RussianOrganization>
+                <NameFull>Акционерное общество "СЕВЕРГАЗБАНК"</NameFull>
+                <OGRN>1023500000160</OGRN>
+                <INN>3525023780</INN>
+                <Address>
+                  <RegionCode>35</RegionCode>
+                  <Region>Вологодская обл</Region>
+                  <City>Вологда</City>
+                  <Street>Благовещенская ул</Street>
+                  <House>3</House>
+                </Address>
+              </RussianOrganization>
+            </Organization>
+          </Pledgee>
+        </Pledgee>
+        <PledgeContract>
+          <Name>Договор залога</Name>
+          <Date>2014-03-07</Date>
+          <Number>б\н</Number>
+          <TermOfContract>2034-01-31</TermOfContract>
+        </PledgeContract>
+        <NotificationApplicant>
+          <Role>2</Role>
+          <Organization>
+            <NameFull>Акционерное общество "СЕВЕРГАЗБАНК"</NameFull>
+            <URN>1023500000160</URN>
+            <UINN>3525023780</UINN>
+          </Organization>
+          <Attorney>
+            <Name>
+              <Last>Костромин</Last>
+              <First>Сергей</First>
+              <Middle>Александрович</Middle>
+            </Name>
+            <BirthDate>1963-09-03</BirthDate>
+            <Authority>доверенность</Authority>
+            <PersonDocument>
+              <Code>21</Code>
+              <Name>Паспорт гражданина Российской Федерации (для гражданина Российской Федерации, достигшего 14 лет)</Name>
+              <SeriesNumber>19 08 568187</SeriesNumber>
+            </PersonDocument>
+            <PersonAddress>
+              <AddressRF registration="true">
+                <RegionCode>35</RegionCode>
+                <Region>Вологодская обл</Region>
+                <City>Вологда</City>
+                <Street>Маршала Конева ул</Street>
+                <House>12</House>
+                <Apartment>14</Apartment>
+              </AddressRF>
+            </PersonAddress>
+          </Attorney>
+        </NotificationApplicant>
+      </FormUZ1>
+    </NotificationData>
+  </RegistrationCertificateData>
+  <RegistrationCertificateNotaryData>
+    <IssuePlace>Бумажное королевство, Замок межгалактического короля</IssuePlace>
+    <IssueDate>2021-08-26</IssueDate>
+    <NotaryName>Документирующий Нотариус Бумагович</NotaryName>
+    <NotaryJobTitle>нотариус Межгалактического нотариального округа</NotaryJobTitle>
+    <NotaryJobTitleShort>Нотариус</NotaryJobTitleShort>
+    <NotaryID>94200045</NotaryID>
+    <SignerID>94200045</SignerID>
+    <RegistryNumber>2021-003-505464-098</RegistryNumber>
+    <Tariff>600</Tariff>
+  </RegistrationCertificateNotaryData>
+</RegistrationCertificate>

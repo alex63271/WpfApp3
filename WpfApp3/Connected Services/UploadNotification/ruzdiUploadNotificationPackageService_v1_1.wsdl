@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns="http://fciit.ru/eis2/ruzdi/uploadNotificationPackageService/v1_0" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns="http://fciit.ru/eis2/ruzdi/uploadNotificationPackageService/v1_0" targetNamespace="http://fciit.ru/eis2/ruzdi/uploadNotificationPackageService/v1_0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified">
+      <xsd:import schemaLocation="ruzdiUploadNotificationPackageService_v1_1?xsd=ruzdiUploadNotificationPackageService_v1_0.xsd" namespace="http://fciit.ru/eis2/ruzdi/uploadNotificationPackageService/v1_0" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="uploadNotificationPackageRequest">
+    <wsdl:part name="parameters" element="ns:uploadNotificationPackageRequest" />
+  </wsdl:message>
+  <wsdl:message name="uploadNotificationPackageResponse">
+    <wsdl:part name="parameters" element="ns:uploadNotificationPackageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ruzdiUploadNotificationPackageService_v1_1PortType">
+    <wsdl:operation name="uploadNotificationPackage">
+      <wsdl:input wsaw:Action="http://fciit.ru/eis2/ruzdi/uploadNotificationPackageService" message="ns:uploadNotificationPackageRequest" />
+      <wsdl:output wsaw:Action="//fciit.ru/eis2/ruzdi/uploadNotificationPackageService/v1_0/uploadNotificationPackageService/uploadNotificationPackageResponse" message="ns:uploadNotificationPackageResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ruzdiUploadNotificationPackageService_v1_1Soap11Binding" type="ns:ruzdiUploadNotificationPackageService_v1_1PortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="uploadNotificationPackage">
+      <soap:operation soapAction="http://fciit.ru/eis2/ruzdi/uploadNotificationPackageService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ruzdiUploadNotificationPackageService_v1_1Soap12Binding" type="ns:ruzdiUploadNotificationPackageService_v1_1PortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="uploadNotificationPackage">
+      <soap12:operation soapAction="http://fciit.ru/eis2/ruzdi/uploadNotificationPackageService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ruzdiUploadNotificationPackageService_v1_1HttpBinding" type="ns:ruzdiUploadNotificationPackageService_v1_1PortType">
+    <http:binding verb="POST" />
+    <wsdl:operation name="uploadNotificationPackage">
+      <http:operation location="uploadNotificationPackage" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ruzdiUploadNotificationPackageService_v1_1">
+    <wsdl:port name="ruzdiUploadNotificationPackageService_v1_1HttpSoap11Endpoint" binding="ns:ruzdiUploadNotificationPackageService_v1_1Soap11Binding">
+      <soap:address location="http://ruzditest.eisnot.ru:8280/services/ruzdiUploadNotificationPackageService_v1_1.ruzdiUploadNotificationPackageService_v1_1HttpSoap11Endpoint" />
+    </wsdl:port>
+    <wsdl:port name="ruzdiUploadNotificationPackageService_v1_1HttpSoap12Endpoint" binding="ns:ruzdiUploadNotificationPackageService_v1_1Soap12Binding">
+      <soap12:address location="http://ruzditest.eisnot.ru:8280/services/ruzdiUploadNotificationPackageService_v1_1.ruzdiUploadNotificationPackageService_v1_1HttpSoap12Endpoint" />
+    </wsdl:port>
+    <wsdl:port name="ruzdiUploadNotificationPackageService_v1_1HttpEndpoint" binding="ns:ruzdiUploadNotificationPackageService_v1_1HttpBinding">
+      <http:address location="http://ruzditest.eisnot.ru:8280/services/ruzdiUploadNotificationPackageService_v1_1.ruzdiUploadNotificationPackageService_v1_1HttpEndpoint" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

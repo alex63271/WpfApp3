@@ -1,0 +1,71 @@
+﻿<Page x:Class="WpfApp3.PledgorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp3"
+      mc:Ignorable="d" 
+      Height="496" Width="888"
+      Background="White"
+     >
+    
+        <Grid>
+            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.75*"></RowDefinition>
+            <RowDefinition Height="2.25*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <Label VerticalAlignment="Center" Grid.ColumnSpan="3" Content="Сведения о залогодателе" HorizontalAlignment="Center" FontSize="16"/>
+        <Button Margin="10" VerticalAlignment="Center" Name="PledgorButton" Grid.Row="2" Grid.Column="2" Content="Далее >>"  FontSize="16" Click="PledgorButton_Click"/>
+
+
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition Height="5" ></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+            </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition ></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+
+            <Label VerticalAlignment="Center" Content="Фамилия" HorizontalAlignment="Right" />
+            <Label VerticalAlignment="Center" Grid.Row="2"  Content="Имя" HorizontalAlignment="Right" />
+            <Label VerticalAlignment="Center" Grid.Row="4"  Content="Отчество" HorizontalAlignment="Right" />
+            <Label VerticalAlignment="Center" Grid.Row="6"  Content="Дата рождения" HorizontalAlignment="Right" />
+            <Label VerticalAlignment="Center" Grid.Row="8"  Content="Регион" HorizontalAlignment="Right" />
+            <Label VerticalAlignment="Center" Grid.Row="10"  Content="Серия и номер паспорта" HorizontalAlignment="Right" />
+
+            <TextBox  Style="{DynamicResource TextStyle}"  Grid.Column="1"  x:Name="Last" />
+            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="2" Grid.Column="1"  x:Name="First" />
+            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="4" Grid.Column="1"   x:Name="Middle" />
+            <DatePicker Style="{DynamicResource PikerStyle}" Grid.Row="6" Grid.Column="1"   x:Name="BirthDate" SelectedDate="2000-12-31"  />
+            <ComboBox Style="{DynamicResource ComboStyle}" Grid.Row="8" Grid.Column="1"  x:Name="Region" />
+            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="10" Grid.Column="1"   MaxLength="10" x:Name="Number_passport" />
+
+
+            </Grid>
+            
+              </Grid>
+       
+</Page>

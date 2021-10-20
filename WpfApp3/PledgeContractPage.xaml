@@ -24,7 +24,7 @@
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Label   Grid.ColumnSpan="3" Content="Сведения о договоре залога" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+        <Label Style="{DynamicResource LabelStyle}"  Grid.ColumnSpan="3" Content="Сведения о договоре залога" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
         <Button Grid.Row="2" Grid.Column="2" x:Name="SaveContract" Content="Далее >>" Click="SaveContract_Click" Margin="10" VerticalAlignment="Center"  FontSize="16"/>
         <Button Grid.Row="2"  Margin="10" Click="ContractBack_Click" VerticalAlignment="Center"  x:Name="ContractBack" Content="&lt;&lt; Назад"  FontSize="16" />
 
@@ -45,10 +45,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label VerticalContentAlignment="Center" HorizontalAlignment="Right"  Content="Наименование договора" FontSize="14" />
-            <Label VerticalContentAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Content="Дата договора" FontSize="14" />
-            <Label VerticalContentAlignment="Center" HorizontalAlignment="Right" Grid.Row="4" Content="Номер договора"  FontSize="14" />
-            <Label VerticalContentAlignment="Center" HorizontalAlignment="Right" Grid.Row="6" Content="Срок истечения обязательств" FontSize="14" />
+            <Label Style="{DynamicResource LabelStyle}" VerticalContentAlignment="Center" HorizontalAlignment="Right"  Content="Наименование договора" FontSize="14" />
+            <Label Style="{DynamicResource LabelStyle}" VerticalContentAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Content="Дата договора" FontSize="14" />
+            <Label Style="{DynamicResource LabelStyle}" VerticalContentAlignment="Center" HorizontalAlignment="Right" Grid.Row="4" Content="Номер договора"  FontSize="14" />
+            <Label Style="{DynamicResource LabelStyle}" VerticalContentAlignment="Center" HorizontalAlignment="Right" Grid.Row="6" Content="Срок истечения обязательств" FontSize="14" />
             <TextBox  Style="{DynamicResource TextStyle}" Grid.Column="1" x:Name="Name"/>
             <TextBox Style="{DynamicResource TextStyle}" Grid.Row="4" Grid.Column="1" x:Name="Number" />
             <DatePicker Style="{DynamicResource PikerStyle}" Grid.Row="2" Grid.Column="1" x:Name="Date" SelectedDate="2000-12-31"  />

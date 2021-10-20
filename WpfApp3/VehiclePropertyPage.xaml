@@ -24,7 +24,7 @@
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Label  VerticalAlignment="Center" Grid.ColumnSpan="3" Content="Транспортное средство" HorizontalAlignment="Center" FontSize="16"/>
+        <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.ColumnSpan="3" Content="Транспортное средство" HorizontalAlignment="Center" FontSize="16"/>
 
         <Button Grid.Row="2" Grid.Column="2" Margin="10" VerticalAlignment="Center"  x:Name="SaveVehicleProperty" FontSize="16" Content="Далее >>" Click="SaveVehicleProperty_Click" />
         <Button Grid.Row="2" Click="VehicleBack_Click" Margin="10" VerticalAlignment="Center"  x:Name="VehicleBack" Content="&lt;&lt; Назад"  FontSize="16" />
@@ -44,8 +44,8 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Label VerticalAlignment="Center" HorizontalAlignment="Right"  Content="VIN" FontSize="14"/>
-        <Label HorizontalAlignment="Right" Grid.Row="2" Content="Описание" FontSize="14"/>
+            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" HorizontalAlignment="Right"  Content="VIN" FontSize="14"/>
+            <Label Style="{DynamicResource LabelStyle}" HorizontalAlignment="Right" Grid.Row="2" Content="Описание" FontSize="14"/>
             <TextBox Style="{DynamicResource TextStyle}" Grid.Column="1" x:Name="VIN"  />
             <TextBox Style="{DynamicResource TextStyle}" Grid.Row="2" Grid.Column="1" x:Name="Description" TextWrapping="Wrap"/>
 

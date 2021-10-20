@@ -33,9 +33,9 @@ namespace WpfApp3
             
             foreach (Window window in Application.Current.Windows)
             {
-                if (window.GetType() == typeof(MainWindow))
+                if (window.GetType() == typeof(GlavnayaWindow))
                 {
-                    (window as MainWindow).UpdateDataGrid();
+                    (window as GlavnayaWindow).UpdateDataGrid();
                 }
             }
            

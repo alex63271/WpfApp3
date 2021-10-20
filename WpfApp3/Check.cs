@@ -22,7 +22,12 @@ namespace WpfApp3
         public static int HashContract;
         public static string NotificationId;
         public static string guidp;
-        public static string connectionString = "server=localhost;user id=enot;persistsecurityinfo=True;database=TestRUZDI;allowuservariables=True;Password=gdh1geit";
+        public static string AdressMysql;
+        public static string login;
+        public static string password;
+        public static int port;
+        public static string DBName;
+        public static string connectionString;// = "server=" + AdressMysql + ";user id=" + login + ";persistsecurityinfo=True;database=" + DBName + ";allowuservariables=True;Password="+ password+ "port="+ port;
         public static string sql = "SELECT CONCAT(Person.Last , ' ', Person.First, ' ',Person.Middle) AS ФИО, DATE_FORMAT(notification.DataTime, '%d.%m.%Y  %H.%i') as DataTime, notification.NumberNotification, Contracts.Number, notification.Status, notification.TypeNotification  FROM notification LEFT OUTER  join Person ON Person.Hash = notification.Pledgor LEFT OUTER join Contracts ON Contracts.Hash = notification.PledgeContract;";  // sql-запрос для создания кэша таблицы notification
 
 

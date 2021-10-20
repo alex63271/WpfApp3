@@ -22,9 +22,14 @@ namespace WpfApp3
     /// </summary>
     public partial class ApplicantPage : Page
     {
+
+
+        ArrayList list2 = new ArrayList();
+        ArrayList list = new ArrayList();
         public ApplicantPage()
         {
             InitializeComponent();
+            
             using (MySqlConnection connection = new MySqlConnection(Check.connectionString))  //создаем объект подключения к mysql
             {
                 connection.Open();
@@ -44,47 +49,48 @@ namespace WpfApp3
             }
 
 
-            using (X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
-            {
+                                using (X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
+                                {
 
-                store.Open(OpenFlags.ReadOnly);
-                ArrayList list = new ArrayList();
-                // Проходим по всем сертификатам 
-                foreach (X509Certificate2 cert in store.Certificates)
-                {
-                    if (cert.NotAfter > DateTime.Now)
-                    {
-                        string zap = ",";
-                        string otvet = cert.SubjectName.Name + zap; //добавляем запятую в конец чтобы искался последний элемент в строке
-
-
-                        if (otvet.Contains("CN=") && otvet.Contains("SN=") && otvet.Contains("G=") && otvet.Contains("ОГРН="))  //отсеиваем сертификаты без нужных атрибутов
-                        {
-
-                            string s = "CN=";
-                            string CN = otvet.Substring(otvet.IndexOf(s) + s.Length, otvet.IndexOf(zap, otvet.IndexOf(s)) - (otvet.IndexOf(s) + s.Length));
+                                    store.Open(OpenFlags.ReadOnly);
+                                    
+                
+                                    // Проходим по всем сертификатам 
+                                    foreach (X509Certificate2 cert in store.Certificates)
+                                    {
+                                        if (cert.NotAfter > DateTime.Now) // выбираем сертификаты с действующим сроком
+                                        {
+                                            string zap = ",";
+                                            string otvet = cert.SubjectName.Name + zap; //добавляем запятую в конец чтобы искался последний элемент в строке
 
 
-                            s = "SN=";
-                            string SN = otvet.Substring(otvet.IndexOf(s) + s.Length, otvet.IndexOf(zap, otvet.IndexOf(s)) - (otvet.IndexOf(s) + s.Length));
+                                            if (otvet.Contains("CN=") && otvet.Contains("SN=") && otvet.Contains("G=") && otvet.Contains("ОГРН="))  //отсеиваем сертификаты без нужных атрибутов
+                                            {
 
-                            s = "G=";
-                            string G = otvet.Substring(otvet.IndexOf(s) + s.Length, otvet.IndexOf(zap, otvet.IndexOf(s)) - (otvet.IndexOf(s) + s.Length));
+                                                string s = "CN=";
+                                                string CN = otvet.Substring(otvet.IndexOf(s) + s.Length, otvet.IndexOf(zap, otvet.IndexOf(s)) - (otvet.IndexOf(s) + s.Length));
 
 
+                                                s = "SN=";
+                                                string SN = otvet.Substring(otvet.IndexOf(s) + s.Length, otvet.IndexOf(zap, otvet.IndexOf(s)) - (otvet.IndexOf(s) + s.Length));
 
-                            string stroka = CN + ", " + SN + " " + G;    //создаем строку для записи её в лист
-                           
+                                                s = "G=";
+                                                string G = otvet.Substring(otvet.IndexOf(s) + s.Length, otvet.IndexOf(zap, otvet.IndexOf(s)) - (otvet.IndexOf(s) + s.Length));
 
 
 
-                            list.Add(stroka);   //записываем строку в лист
+                                                string stroka = CN + ", " + SN + " " + G;    //создаем строку для записи её в лист
+                            
 
 
 
-                        }
-                    }
-                }
+                                                list.Add(stroka);   //записываем строку в лист для отображения в интерфейсе
+                                                list2.Add(cert.Thumbprint);  // лист2 для программного выбора сертификата(содержит отпечатки сертификатов)
+
+
+                                            }
+                                        }
+                                    }
 
                 ComboCert.ItemsSource = list;
             }
@@ -98,6 +104,19 @@ namespace WpfApp3
 
         private async void SendNotification_Click(object sender, RoutedEventArgs e)
         {
+            // проверяем поля на пустоту
+            if (string.IsNullOrEmpty(FamiliyaTexbox.Text) || string.IsNullOrEmpty(NameTexbox.Text) || string.IsNullOrEmpty(Ot4estTexbox.Text) || string.IsNullOrEmpty(BirthDatePicker.Text) || string.IsNullOrEmpty(Polnomo4Texbox.Text) || string.IsNullOrEmpty(NumberPasspTexbox.Text) || string.IsNullOrEmpty(mailTextbox.Text) || string.IsNullOrEmpty(ComboCert.Text))
+            {
+                MessageBox.Show("нужно заполнить все поля");
+                return;
+            }
+
+            
+
+
+
+
+
             string Temp = "Temp/"; // папка для временных файлов
 
             string TempNotificationId = Temp + Check.NotificationId;    //папка для хранения уведомления и подписи
@@ -136,12 +155,12 @@ namespace WpfApp3
                 MessageBox.Show("Объект сериализован");
             }
 
+
+
+
            
-
-
-
-
-
+            
+            
 
 
 
@@ -154,7 +173,7 @@ namespace WpfApp3
             Process.Start(new ProcessStartInfo
             {
                 FileName = "cmd.exe",
-                Arguments = "/C " + csp + " -sfsign -sign -detached -add -in " + putxml + ".xml -out " + putxml + ".xml.sig -my eb3aad1807409334b41fa435241f1f824cc6ffc6",
+                Arguments = "/C " + csp + " -sfsign -sign -detached -add -in " + putxml + ".xml -out " + putxml + ".xml.sig -my " + list2[ComboCert.SelectedIndex].ToString(), 
                 WindowStyle = ProcessWindowStyle.Hidden
             });
 
@@ -302,14 +321,19 @@ namespace WpfApp3
           
          
             MessageBox.Show($"Пакет отправлен успешно, рег № пакета -  {response.registrationId}");
+            
 
-           
 
         }
 
         private void ApplicantBack_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new PledgeContractPage());
+        }
+
+        private void NumberPasspTexbox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = !Char.IsDigit(e.Text, 0);
         }
     }
     

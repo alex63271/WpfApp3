@@ -133,6 +133,7 @@
     <Compile Include="Applicant_Classes\ApplicantAttorneyPersonDocument.cs" />
     <Compile Include="Applicant_Classes\ApplicantOrganization.cs" />
     <Compile Include="Applicant_Classes\NotificationApplicant.cs" />
+    <Compile Include="Conf.cs" />
     <Compile Include="Connected Services\GetNotification\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -150,6 +151,9 @@
       <DependentUpon>CreateUZ1Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="FormUZ1.cs" />
+    <Compile Include="GlavnayaWindow.xaml.cs">
+      <DependentUpon>GlavnayaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NotificationData.cs" />
     <Compile Include="PledgeContractPage.xaml.cs">
       <DependentUpon>PledgeContractPage.xaml</DependentUpon>
@@ -181,6 +185,9 @@
     <Compile Include="RegistrationRejectMessage\RegistrationRejectMessage.cs" />
     <Compile Include="RussianOrganization.cs" />
     <Compile Include="RussianOrganizationAddress.cs" />
+    <Compile Include="SettingsWindow2.xaml.cs">
+      <DependentUpon>SettingsWindow2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UP1.cs" />
     <Compile Include="VehiclePropertyPage.xaml.cs">
       <DependentUpon>VehiclePropertyPage.xaml</DependentUpon>
@@ -194,6 +201,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateUZ1Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GlavnayaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,6 +230,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PledgorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsWindow2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

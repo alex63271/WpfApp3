@@ -8,7 +8,8 @@
         WindowStartupLocation="CenterScreen"
         Title="Уведомление об исключении залога"
         Height="600" Width="900" 
-        ResizeMode="NoResize" Closed="Window_Closed_1" 
+        ResizeMode="NoResize" 
+        
         >
     <Grid>
 
@@ -30,7 +31,7 @@
 
         <Button Margin="10" IsCancel="True" Grid.Row="3" Grid.Column="2" x:Name="SendNotificationUP1" Content="Подписать и отправить"  FontSize="16"  Click="SendNotificationUP1_Click"/>
         <Label Style="{DynamicResource LabelStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="1" Grid.ColumnSpan="3"  Content="Сведения о заявителе:" FontSize="16"/>
-        
+
 
 
         <Grid  Grid.Row="2" Grid.ColumnSpan="2">
@@ -52,8 +53,9 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="149*"></ColumnDefinition>
+                <ColumnDefinition Width="98*"></ColumnDefinition>
+                <ColumnDefinition Width="51*"/>
             </Grid.ColumnDefinitions>
 
             <Label Style="{DynamicResource LabelStyle}" HorizontalContentAlignment="Right" Name="NameOrg"  Content="Наименование организации"/>
@@ -61,37 +63,37 @@
             <Label Style="{DynamicResource LabelStyle}" HorizontalContentAlignment="Right" Grid.Row="2" Content="ОГРН - " />
             <Label Style="{DynamicResource LabelStyle}" HorizontalContentAlignment="Right" Grid.Row="3" Content="Регион - "/>
 
-            <TextBox Style="{DynamicResource TextStyle}" Name="NameORG"   Grid.Column="1"   />
-            <TextBox Style="{DynamicResource TextStyle}" Name="AplicantINN" Grid.Row="1"   Grid.Column="1" />
-            <TextBox Style="{DynamicResource TextStyle}"  Name="AplicantOGRN" Grid.Row="2"  Grid.Column="1"  />
-            <ComboBox Style="{DynamicResource ComboStyle}"  Name="AplicantRegion" Grid.Row="3"   Grid.Column="1"   />
+            <TextBox Style="{DynamicResource TextStyle}" Name="NameORG"   Grid.Column="1" Grid.ColumnSpan="2"   />
+            <TextBox Style="{DynamicResource TextStyle}" Name="AplicantINN" Grid.Row="1"   Grid.Column="1"  MaxLength="10" PreviewTextInput="AplicantINN_PreviewTextInput" Grid.ColumnSpan="2"/>
+            <TextBox Style="{DynamicResource TextStyle}"  Name="AplicantOGRN" Grid.Row="2"  Grid.Column="1" MaxLength="13" PreviewTextInput="AplicantOGRN_PreviewTextInput" Grid.ColumnSpan="2" />
+            <ComboBox Style="{DynamicResource ComboStyle}"  Name="AplicantRegion" Grid.Row="3"   Grid.Column="1" Grid.ColumnSpan="2"   />
 
 
             <Label Style="{DynamicResource LabelStyle}" Grid.Row="4" HorizontalContentAlignment="Right" Name="Predstavitel" Content="Сведения о представителе:"/>
 
-            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="8" HorizontalContentAlignment="Right" Name="Data" Content="Дата рождения"/>
+            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="8" HorizontalContentAlignment="Right" Name="Data" Content="Дата рождения" Margin="0,5"/>
 
-            <Label Style="{DynamicResource LabelStyle}" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Row="9" Name="Polnomo4iya" Content="Основание полномочий:"/>
-            <Label Style="{DynamicResource LabelStyle}" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Row="10" Name="Passport" Content="Серия и номер паспорта:"/>
-            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="11" HorizontalContentAlignment="Right" Name="mailApplicant" Content="E-mail:"/>
+            <Label Style="{DynamicResource LabelStyle}" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Row="9" Name="Polnomo4iya" Content="Основание полномочий:" Margin="0,4"/>
+            <Label Style="{DynamicResource LabelStyle}" HorizontalContentAlignment="Right" VerticalAlignment="Center" Grid.Row="10" Name="Passport" Content="Серия и номер паспорта:" Margin="0,4"/>
+            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="11" HorizontalContentAlignment="Right" Name="mailApplicant" Content="E-mail:" Margin="0,4"/>
 
-            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="9" Grid.Column="1" x:Name="Polnomo4Texbox" TextWrapping="Wrap"/>
-            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="10"  Grid.Column="1" x:Name="NumberPasspTexbox" TextWrapping="Wrap"/>
-            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="11"  Grid.Column="1" x:Name="mailTextbox" />
-            <DatePicker Style="{DynamicResource PikerStyle}" Grid.Row="8" Grid.Column="1" x:Name="BirthDatePicker" SelectedDate="2000-12-31"  />
+            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="9" Grid.Column="1" x:Name="Polnomo4Texbox" TextWrapping="Wrap" Grid.ColumnSpan="2"/>
+            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="10"  Grid.Column="1" x:Name="NumberPasspTexbox" MaxLength="10" TextWrapping="Wrap" PreviewTextInput="NumberPasspTexbox_PreviewTextInput" Grid.ColumnSpan="2"/>
+            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="11"  Grid.Column="1" x:Name="mailTextbox" Grid.ColumnSpan="2" />
+            <DatePicker Style="{DynamicResource PikerStyle}" Grid.Row="8" Grid.Column="1" x:Name="BirthDatePicker" SelectedDate="2000-12-31" Grid.ColumnSpan="2"  />
 
-            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center"  Grid.Row="5" HorizontalContentAlignment="Right" Name="Familiya" Content="Фамилия" />
+            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center"  Grid.Row="5" HorizontalContentAlignment="Right" Name="Familiya" Content="Фамилия" Margin="0,4" />
 
-            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="5" Grid.Column="1"  x:Name="FamiliyaTexbox" TextWrapping="Wrap"  />
-
-
-
-            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="6" HorizontalContentAlignment="Right" Name="Imya" Content="Имя" />
-            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="6" Grid.Column="1" x:Name="NameTexbox" TextWrapping="Wrap"  />
+            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="5" Grid.Column="1"  x:Name="FamiliyaTexbox" TextWrapping="Wrap" Grid.ColumnSpan="2"  />
 
 
-            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="7" HorizontalContentAlignment="Right" Name="Ot4estvo" Content="Отчество" />
-            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="7" Grid.Column="1" x:Name="Ot4estTexbox" TextWrapping="Wrap" />
+
+            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="6" HorizontalContentAlignment="Right" Name="Imya" Content="Имя" Margin="0,4" />
+            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="6" Grid.Column="1" x:Name="NameTexbox" TextWrapping="Wrap" Grid.ColumnSpan="2"  />
+
+
+            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="7" HorizontalContentAlignment="Right" Name="Ot4estvo" Content="Отчество" Margin="0,4" />
+            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="7" Grid.Column="1" x:Name="Ot4estTexbox" TextWrapping="Wrap" Grid.ColumnSpan="2" />
 
 
         </Grid>

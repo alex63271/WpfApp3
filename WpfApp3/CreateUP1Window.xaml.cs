@@ -75,9 +75,9 @@ namespace WpfApp3
         {
             foreach (Window window in Application.Current.Windows)
             {
-                if (window.GetType() == typeof(MainWindow))
+                if (window.GetType() == typeof(GlavnayaWindow))
                 {
-                    (window as MainWindow).UpdateDataGrid();
+                    (window as GlavnayaWindow).UpdateDataGrid();
                 }
             }
         }
@@ -273,6 +273,19 @@ namespace WpfApp3
 
         }
 
-        
+        private void NumberPasspTexbox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Char.IsDigit(e.Text, 0);
+        }
+
+        private void AplicantINN_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Char.IsDigit(e.Text, 0);
+        }
+
+        private void AplicantOGRN_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Char.IsDigit(e.Text, 0);
+        }
     }
 }

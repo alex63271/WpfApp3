@@ -47,6 +47,15 @@ namespace WpfApp3
 
         private async void SaveVehicleProperty_Click(object sender, RoutedEventArgs e)
         {
+            // проверяем поля на пустоту
+            if (string.IsNullOrEmpty(VIN.Text) && string.IsNullOrEmpty(Description.Text) )
+            {
+                MessageBox.Show("нужно заполнить хотябы одно поле");
+                return;
+            }
+
+
+
             using (MySqlConnection connection = new MySqlConnection(Check.connectionString))  //создаем объект подключения к mysql
             {
                 string sqlVehicleProperty = "SELECT * FROM VehicleProperty";

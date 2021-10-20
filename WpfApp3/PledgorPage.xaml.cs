@@ -26,6 +26,7 @@ namespace WpfApp3
         public PledgorPage()
         {
             InitializeComponent();
+            
             LoadComboBoxRegionAsync();    //выполнем асинхронный метод заполнения комбобокса "Регионы" у залогодателя и залогодержателя
 
             using (MySqlConnection connection = new MySqlConnection(Check.connectionString))  //создаем объект подключения к mysql
@@ -87,6 +88,14 @@ namespace WpfApp3
 
         private void PledgorButton_Click(object sender, RoutedEventArgs e)
         {
+
+            // проверяем поля на пустоту
+            if (string.IsNullOrEmpty(Last.Text) || string.IsNullOrEmpty(First.Text) || string.IsNullOrEmpty(Middle.Text) || string.IsNullOrEmpty(Number_passport.Text) || string.IsNullOrEmpty(Region.Text))
+            {
+                MessageBox.Show("нужно заполнить все поля");
+                return;
+            }
+
             string sqlPerson = "SELECT * FROM Person";
 
 
@@ -123,6 +132,11 @@ namespace WpfApp3
             }
             //CreateUZ1Win.DialogResult = true;
             NavigationService.Navigate(new PledgeePage());
+        }
+
+        private void Number_passport_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Char.IsDigit(e.Text, 0);
         }
     }
 }

@@ -47,6 +47,16 @@ namespace WpfApp3
         private async void SaveContract_Click(object sender, RoutedEventArgs e)
         {
 
+            // проверяем поля на пустоту
+            if (string.IsNullOrEmpty(Name.Text) || string.IsNullOrEmpty(Date.Text) || string.IsNullOrEmpty(Number.Text) || string.IsNullOrEmpty(TermOfContract.Text))
+            {
+                MessageBox.Show("нужно заполнить все поля");
+                return;
+            }
+
+
+
+
             if (Check.CheckContracts((Date.SelectedDate.Value + Number.Text + TermOfContract.SelectedDate.Value).GetHashCode().ToString()))    //проверяем, есть ли в БД такой договор
             {
                 Check.HashContract = (Date.SelectedDate.Value + Number.Text + TermOfContract.SelectedDate.Value).GetHashCode();

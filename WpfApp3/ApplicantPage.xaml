@@ -85,7 +85,7 @@
             <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="11" HorizontalContentAlignment="Right" Name="mailApplicant" Content="E-mail:"/>
 
             <TextBox Style="{DynamicResource TextStyle}" Grid.Row="9" Grid.Column="1" x:Name="Polnomo4Texbox" TextWrapping="Wrap"/>
-            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="10"  Grid.Column="1" x:Name="NumberPasspTexbox" TextWrapping="Wrap"/>
+            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="10"  Grid.Column="1" MaxLength="10" x:Name="NumberPasspTexbox" TextWrapping="Wrap" PreviewTextInput="NumberPasspTexbox_PreviewTextInput"/>
             <TextBox Style="{DynamicResource TextStyle}" Grid.Row="11"  Grid.Column="1" x:Name="mailTextbox" />
             <DatePicker Style="{DynamicResource PikerStyle}" Grid.Row="8" Grid.Column="1" x:Name="BirthDatePicker" SelectedDate="2000-12-31"  />
 

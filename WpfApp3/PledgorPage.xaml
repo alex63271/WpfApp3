@@ -24,7 +24,7 @@
             </Grid.ColumnDefinitions>
 
 
-            <Label VerticalAlignment="Center" Grid.ColumnSpan="3" Content="Сведения о залогодателе" HorizontalAlignment="Center" FontSize="16"/>
+        <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.ColumnSpan="3" Content="Сведения о залогодателе" HorizontalAlignment="Center" FontSize="16"/>
         <Button Margin="10" VerticalAlignment="Center" Name="PledgorButton" Grid.Row="2" Grid.Column="2" Content="Далее >>"  FontSize="16" Click="PledgorButton_Click"/>
 
 
@@ -49,19 +49,19 @@
 
                 </Grid.ColumnDefinitions>
 
-            <Label VerticalAlignment="Center" Content="Фамилия" HorizontalAlignment="Right" />
-            <Label VerticalAlignment="Center" Grid.Row="2"  Content="Имя" HorizontalAlignment="Right" />
-            <Label VerticalAlignment="Center" Grid.Row="4"  Content="Отчество" HorizontalAlignment="Right" />
-            <Label VerticalAlignment="Center" Grid.Row="6"  Content="Дата рождения" HorizontalAlignment="Right" />
-            <Label VerticalAlignment="Center" Grid.Row="8"  Content="Регион" HorizontalAlignment="Right" />
-            <Label VerticalAlignment="Center" Grid.Row="10"  Content="Серия и номер паспорта" HorizontalAlignment="Right" />
+            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Content="Фамилия" HorizontalAlignment="Right" />
+            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="2"  Content="Имя" HorizontalAlignment="Right" />
+            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="4"  Content="Отчество" HorizontalAlignment="Right" />
+            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="6"  Content="Дата рождения" HorizontalAlignment="Right" />
+            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="8"  Content="Регион" HorizontalAlignment="Right" />
+            <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="10"  Content="Серия и номер паспорта" HorizontalAlignment="Right" />
 
-            <TextBox  Style="{DynamicResource TextStyle}"  Grid.Column="1"  x:Name="Last" />
+            <TextBox Text="{Binding Path = Last}" Style="{DynamicResource TextStyle}"  Grid.Column="1"  x:Name="Last" />
             <TextBox Style="{DynamicResource TextStyle}" Grid.Row="2" Grid.Column="1"  x:Name="First" />
             <TextBox Style="{DynamicResource TextStyle}" Grid.Row="4" Grid.Column="1"   x:Name="Middle" />
             <DatePicker Style="{DynamicResource PikerStyle}" Grid.Row="6" Grid.Column="1"   x:Name="BirthDate" SelectedDate="2000-12-31"  />
             <ComboBox Style="{DynamicResource ComboStyle}" Grid.Row="8" Grid.Column="1"  x:Name="Region" />
-            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="10" Grid.Column="1"   MaxLength="10" x:Name="Number_passport" />
+            <TextBox Style="{DynamicResource TextStyle}" Grid.Row="10" Grid.Column="1"   MaxLength="10" x:Name="Number_passport" PreviewTextInput="Number_passport_PreviewTextInput" />
 
 
             </Grid>

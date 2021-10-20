@@ -77,6 +77,16 @@ namespace WpfApp3
 
         private void ButtonSavePledgee_Click(object sender, RoutedEventArgs e)
         {
+
+            // проверяем поля на пустоту
+            if (string.IsNullOrEmpty(NameFull.Text) || string.IsNullOrEmpty(INN.Text) || string.IsNullOrEmpty(OGRN.Text) || string.IsNullOrEmpty(mail.Text) || string.IsNullOrEmpty(RegionPledgee.Text))
+            {
+                MessageBox.Show("нужно заполнить все поля");
+                return;
+            }
+
+
+
             string sqlOrganization = "SELECT * FROM Organization";
             Check.HashPledgee = (NameFull.Text + OGRN.Text + INN.Text + mail.Text).GetHashCode();
 
@@ -112,6 +122,16 @@ namespace WpfApp3
         private void PledgeeBack_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new PledgorPage());
+        }
+
+        private void INN_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Char.IsDigit(e.Text, 0);
+        }
+
+        private void OGRN_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Char.IsDigit(e.Text, 0);
         }
     }
 }

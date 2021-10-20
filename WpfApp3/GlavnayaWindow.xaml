@@ -1,0 +1,73 @@
+﻿<Window x:Class="WpfApp3.GlavnayaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3"
+        mc:Ignorable="d"
+        Title="Регистрация уведомлений о залоге (Тестовая среда)"
+        WindowStartupLocation="CenterScreen"
+       >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*" ></RowDefinition>
+            <RowDefinition Height="4*" ></RowDefinition>
+
+        </Grid.RowDefinitions>
+
+        <Menu Height="25" VerticalAlignment="Top">
+            <MenuItem Header="Создать уведомление ..." >
+                <MenuItem Header="О возникновении залга" Click="Create_UZ1"/>
+                <MenuItem Header="Об исключении залога" Name="Create_UP1" Click="Create_UP1_Click"/>
+
+            </MenuItem>
+
+            <MenuItem Header="Настройки">
+                <MenuItem Header="Настройки" Name="Setting" Click="Setting_Click" />
+            </MenuItem>
+        </Menu>
+
+        <DataGrid  Margin="5 25 5 0" x:Name="h1" ColumnWidth="*" CanUserAddRows="False"  IsReadOnly="True" RowBackground="White"  HeadersVisibility="Column" AutoGenerateColumns="False"  AlternatingRowBackground="#ebebeb" >
+            <DataGrid.Columns >
+                <DataGridTextColumn x:Name="st1" Header="Тип уведомления" Binding= "{Binding TypeNotification}"  />
+                <!--привязка к ФИО из sql-запроса -->
+                <DataGridTextColumn x:Name="st2" Header="Дата/время регистрации(МСК)" Binding= "{Binding DataTime}"  />
+                <!--привязка к ФИО из sql-запроса -->
+
+                <!--привязка к ID из sql-запроса-->
+                <DataGridTextColumn x:Name="st3" Header="Номер уведолмения" Binding= "{Binding NumberNotification}"  />
+                <!--привязка к IDMU из sql-запроса-->
+                <DataGridTextColumn x:Name="st4" Header="Залогодатель (ФИО)" Binding= "{Binding ФИО}" />
+
+                <DataGridTextColumn x:Name="st5" Header="Номер договора залога" Binding= "{Binding Number}" />
+
+                <DataGridTextColumn x:Name="st6" Header="Статус" Binding= "{Binding Status}" />
+            </DataGrid.Columns>
+
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Копировать рег. номер пакета" Command="Copy" CommandTarget="{Binding ElementName=txtBox}"/>
+                    <MenuItem Header="Скачать свидетельсвто" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+
+        </DataGrid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75*"></ColumnDefinition>
+                <ColumnDefinition Width="18*"></ColumnDefinition>
+                <ColumnDefinition Width="7*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*" ></RowDefinition>
+                <RowDefinition Height="2*" ></RowDefinition>
+                <RowDefinition Height="4*" ></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="1" Grid.Row="1"  Content="Обновить статусы" Name="RenewState" Click="RenewState_Click"/>
+
+        </Grid>
+    </Grid>
+
+</Window>

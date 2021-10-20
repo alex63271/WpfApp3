@@ -1,16 +1,15 @@
-﻿<Window x:Class="WpfApp3.MainWindow"
+﻿<Window x:Class="WpfApp3.SettingsWindow2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
-        Height="496" Width="888"
-        Title="Настройки"         
-        WindowStartupLocation="CenterScreen"
+        Title="Настройки" 
         ResizeMode="NoResize"
-       >
-   
+        WindowStartupLocation="CenterScreen"
+        Height="496" Width="888"
+        >
     <Grid>
 
         <Grid.RowDefinitions>
@@ -63,7 +62,7 @@
 
 
             <TextBox Text="{Binding Path = DBName}" Style="{DynamicResource TextStyle}" Grid.Row="2" Grid.Column="1"  x:Name="DBName" />
-            <TextBox Text="{Binding Path = Login}" Style="{DynamicResource TextStyle}" Grid.Row="4" Grid.Column="1"   x:Name="Login" />
+            <TextBox Text="{Binding Path = login}" Style="{DynamicResource TextStyle}" Grid.Row="4" Grid.Column="1"   x:Name="Login" />
             <PasswordBox FontSize="15" Margin="0 5 0 5" Padding="0 3 0 3"   Grid.Row="6" Grid.Column="1"   x:Name="PasswordBox" />
             <TextBox Text="{Binding Path = port}" Style="{DynamicResource TextStyle}" Grid.Row="8" Grid.Column="1"  x:Name="port" PreviewTextInput="port_PreviewTextInput" />
             <TextBox Text="{Binding Path = pathCSP}" Style="{DynamicResource TextStyle}" Grid.Row="10" Grid.Column="1"  x:Name="pathCSP" />
@@ -72,5 +71,4 @@
         </Grid>
 
     </Grid>
-
 </Window>

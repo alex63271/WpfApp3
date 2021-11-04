@@ -29,35 +29,41 @@ namespace WpfApp3
             
             LoadComboBoxRegionAsync();    //выполнем асинхронный метод заполнения комбобокса "Регионы" у залогодателя и залогодержателя
 
-            using (MySqlConnection connection = new MySqlConnection(Check.connectionString))  //создаем объект подключения к mysql
-            {
-
-
-                connection.Open();
-                MySqlCommand SELECT = new MySqlCommand("SELECT * FROM Person JOIN Regions ON Person.Region = Regions.Region WHERE Person.Hash = " + Check.HashPledgor.ToString(), connection);
-                DbDataReader reader = SELECT.ExecuteReader(); // получаем из БД залогодателя по его хэшу
-                reader.Read();
-                if (reader.HasRows)
-                {
-                    Last.Text = reader["Last"].ToString();
-                    First.Text = reader["First"].ToString();
-                    Middle.Text = reader["Middle"].ToString();
-                    BirthDate.SelectedDate = Convert.ToDateTime(reader["BirthDate"]);
-                    Region.Text = reader["Region"].ToString();
-                    Number_passport.Text = reader["PersonDocument"].ToString();
-                }
-                else 
-                {
-                  
-                    Check.NotificationId = Guid.NewGuid().ToString(); // запуск первой страницы создания уведомления - генеируем NotificationId
-
-                }
-
-            }
+            LoadLabel();
 
         }
 
-        async void LoadComboBoxRegionAsync()
+
+        async void LoadLabel()
+        {
+            using (MySqlConnection connection = new MySqlConnection(Check.connectionString))  //создаем объект подключения к mysql
+            {
+
+                connection.Open();
+                MySqlCommand SELECT = new MySqlCommand("SELECT * FROM Person JOIN Regions ON Person.Region = Regions.Region WHERE Person.Hash = " + Check.HashPledgor.ToString(), connection);
+                using (DbDataReader reader = await SELECT.ExecuteReaderAsync())
+                { // получаем из БД залогодателя по его хэшу
+                    reader.Read();
+                    if (reader.HasRows)
+                    {
+                        Last.Text = reader["Last"].ToString();
+                        First.Text = reader["First"].ToString();
+                        Middle.Text = reader["Middle"].ToString();
+                        BirthDate.SelectedDate = Convert.ToDateTime(reader["BirthDate"]);
+                        Region.Text = reader["Region"].ToString();
+                        Number_passport.Text = reader["PersonDocument"].ToString();
+                    }
+                    else
+                    {
+
+                        Check.NotificationId = Guid.NewGuid().ToString(); // запуск первой страницы создания уведомления - генеируем NotificationId
+
+                    }
+                }
+            }
+        }
+
+            async void LoadComboBoxRegionAsync()
         {
             using (MySqlConnection connection = new MySqlConnection(Check.connectionString))  //создаем объект подключения к mysql
             {
@@ -69,19 +75,19 @@ namespace WpfApp3
                     connection.Open();
                     MySqlCommand SELECT = new MySqlCommand("SELECT Region FROM Regions", connection);
 
-                    DbDataReader reader = await SELECT.ExecuteReaderAsync(); // получаем из БД регионы
+                    using (DbDataReader reader = await SELECT.ExecuteReaderAsync())
+                    {// получаем из БД регионы
 
-                    while (reader.Read())
-                    {
-                        Region_list.Add(reader["Region"].ToString());    // записываем регионы в список
+                        while (reader.Read())
+                        {
+                            Region_list.Add(reader["Region"].ToString());    // записываем регионы в список
 
+                        }
+                        Region_list.Sort();
                     }
-                    Region_list.Sort();
-                    reader.Close();
-
 
                     Region.ItemsSource = Region_list;
-                    //RegionPledgee.ItemsSource = Region_list;
+                    
                 }
             }
         }

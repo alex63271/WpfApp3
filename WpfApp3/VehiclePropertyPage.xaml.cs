@@ -27,25 +27,31 @@ namespace WpfApp3
         {
             InitializeComponent();
 
+            LoadLabel();
+
+        }
+
+        async void LoadLabel()
+        {
             using (MySqlConnection connection = new MySqlConnection(Check.connectionString))  //создаем объект подключения к mysql
             {
                 connection.Open();
                 MySqlCommand SELECT = new MySqlCommand("SELECT VIN, Description FROM VehicleProperty WHERE Notificationid = '" + Check.NotificationId.ToString() + "'", connection);
-                DbDataReader reader = SELECT.ExecuteReader(); // получаем из БД имущество
-                reader.Read();
-                if (reader.HasRows)
-                {
-                    VIN.Text = reader["VIN"].ToString();
-                    Description.Text = reader["Description"].ToString();
-                    
+                using (DbDataReader reader = await SELECT.ExecuteReaderAsync())
+                { // получаем из БД имущество
+                    reader.Read();
+                    if (reader.HasRows)
+                    {
+                        VIN.Text = reader["VIN"].ToString();
+                        Description.Text = reader["Description"].ToString();
+
+                    }
                 }
             }
-
-
-
         }
 
-        private async void SaveVehicleProperty_Click(object sender, RoutedEventArgs e)
+
+            private async void SaveVehicleProperty_Click(object sender, RoutedEventArgs e)
         {
             // проверяем поля на пустоту
             if (string.IsNullOrEmpty(VIN.Text) && string.IsNullOrEmpty(Description.Text) )

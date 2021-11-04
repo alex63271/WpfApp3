@@ -23,25 +23,32 @@ namespace WpfApp3
     /// </summary>
     public partial class PledgeContractPage : Page
     {
-        public PledgeContractPage()
-        {
-            InitializeComponent();
 
+        public async void LoadContr()
+        {
             using (MySqlConnection connection = new MySqlConnection(Check.connectionString))  //создаем объект подключения к mysql
             {
 
                 connection.Open();
                 MySqlCommand SELECTContr = new MySqlCommand("SELECT * FROM Contracts where Hash = '" + Check.HashContract.ToString() + "'", connection);
-                DbDataReader read = SELECTContr.ExecuteReader(); // получаем из БД список 
-                read.Read();
-                if (read.HasRows)
-                {
-                    Date.SelectedDate = Convert.ToDateTime(read["Data"]);
-                    Number.Text = read["Number"].ToString();
-                    Name.Text = read["Name"].ToString();
-                    TermOfContract.SelectedDate = Convert.ToDateTime(read["TermOfContract"]);
+                using (DbDataReader read = await SELECTContr.ExecuteReaderAsync())
+                { // получаем из БД список 
+                    read.Read();
+                    if (read.HasRows)
+                    {
+                        Date.SelectedDate = Convert.ToDateTime(read["Data"]);
+                        Number.Text = read["Number"].ToString();
+                        Name.Text = read["Name"].ToString();
+                        TermOfContract.SelectedDate = Convert.ToDateTime(read["TermOfContract"]);
+                    }
                 }
             }
+        }
+        public PledgeContractPage()
+        {
+            InitializeComponent();
+
+            LoadContr();
         }
 
         private async void SaveContract_Click(object sender, RoutedEventArgs e)

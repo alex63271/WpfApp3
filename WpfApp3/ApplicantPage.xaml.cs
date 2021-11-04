@@ -26,30 +26,36 @@ namespace WpfApp3
 
         ArrayList list2 = new ArrayList();
         ArrayList list = new ArrayList();
-        public ApplicantPage()
+
+        public async void LoadLabel()
         {
-            InitializeComponent();
-            
             using (MySqlConnection connection = new MySqlConnection(Check.connectionString))  //создаем объект подключения к mysql
             {
                 connection.Open();
                 MySqlCommand SELECT = new MySqlCommand("SELECT * FROM Organization JOIN Regions ON Organization.Region = Regions.Region WHERE Organization.Hash =" + Check.HashPledgee.ToString(), connection);
-                DbDataReader reader = SELECT.ExecuteReader();
-                reader.Read();
+                using (DbDataReader reader = await SELECT.ExecuteReaderAsync())
+                {
+                    reader.Read();
 
 
-                //Заполнение лэйблов заявителя-залогодержателя
+                    //Заполнение лэйблов заявителя-залогодержателя
 
-                NameOrg.Content = reader["NameFull"].ToString();
-                AplicantINN.Content = Convert.ToUInt64(reader["INN"]);
-                AplicantOGRN.Content = Convert.ToUInt64(reader["OGRN"]);
-                AplicantRegion.Content = reader["Region"].ToString();
-                reader.Close();
+                    NameOrg.Content = reader["NameFull"].ToString();
+                    AplicantINN.Content = Convert.ToUInt64(reader["INN"]);
+                    AplicantOGRN.Content = Convert.ToUInt64(reader["OGRN"]);
+                    AplicantRegion.Content = reader["Region"].ToString();
+                }
 
             }
+        }
+        public  ApplicantPage()
+        {
+            InitializeComponent();
+
+            LoadLabel();// метод заполнения лэйблов заявителя-залогодержателя
 
 
-                                using (X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
+            using (X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
                                 {
 
                                     store.Open(OpenFlags.ReadOnly);
@@ -117,11 +123,11 @@ namespace WpfApp3
 
 
 
-            string Temp = "Temp/"; // папка для временных файлов
+           
 
-            string TempNotificationId = Temp + Check.NotificationId;    //папка для хранения уведомления и подписи
+            string TempNotificationId = Check.Temp + Check.NotificationId;    //папка для хранения уведомления и подписи
             string TempNotificationIdXml = TempNotificationId + "/" + Check.NotificationId + ".xml";
-            Directory.CreateDirectory(Temp);
+            
             Directory.CreateDirectory(TempNotificationId);  // создаем папку куда потом сохраним уведомление
 
 
@@ -156,28 +162,51 @@ namespace WpfApp3
             }
 
 
-
-
-           
-            
-            
+            Signxml();
 
 
 
 
-            //подписание уведомления
-            string csp = "\"C:/Program Files/Crypto Pro/CSP/csptest.exe\"";
-            string putxml = Temp + Check.NotificationId + "/" + Check.NotificationId;
 
 
-            Process.Start(new ProcessStartInfo
+            bool Signxml()
             {
-                FileName = "cmd.exe",
-                Arguments = "/C " + csp + " -sfsign -sign -detached -add -in " + putxml + ".xml -out " + putxml + ".xml.sig -my " + list2[ComboCert.SelectedIndex].ToString(), 
-                WindowStyle = ProcessWindowStyle.Hidden
-            });
 
-            MessageBox.Show("уведомление подписано");
+                //подписание уведомления
+                string csp = "\"C:/Program Files/Crypto Pro/CSP/csptest.exe\"";
+                string putxml = Check.Temp + Check.NotificationId + "/" + Check.NotificationId;
+
+
+                Process Process = Process.Start(new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = "/C " + csp + " -sfsign -sign -detached -add -in " + putxml + ".xml -out " + putxml + ".xml.sig -my " + list2[ComboCert.SelectedIndex].ToString(),
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    RedirectStandardError = true,
+                    RedirectStandardOutput = true
+                    
+                });
+                Process.WaitForExit();
+          
+              
+
+
+                if (string.IsNullOrEmpty(Process.StandardError.ReadToEnd()))
+                {
+                    MessageBox.Show("уведомление подписано");
+                    return true;
+                }
+                else 
+                {
+                    MessageBox.Show(Process.StandardError.ReadToEnd());
+                    return false;
+                }
+                
+            }
+
+
 
 
 

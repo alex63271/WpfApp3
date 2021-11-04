@@ -28,25 +28,32 @@ namespace WpfApp3
             InitializeComponent();
             LoadComboBoxRegion();
 
+            LoadLabel();
+
+        }
+
+        async void LoadLabel()
+        {
             using (MySqlConnection connection = new MySqlConnection(Check.connectionString))  //создаем объект подключения к mysql
             {
                 connection.Open();
                 MySqlCommand SELECT = new MySqlCommand("SELECT * FROM Organization JOIN Regions ON Organization.Region = Regions.Region WHERE Organization.Hash =" + Check.HashPledgee.ToString(), connection);
-                DbDataReader reader = SELECT.ExecuteReader();
-                reader.Read();
-                if (reader.HasRows)
+                using (DbDataReader reader = await SELECT.ExecuteReaderAsync())
                 {
-                    NameFull.Text = reader["NameFull"].ToString();
-                    OGRN.Text = reader["OGRN"].ToString();                
-                    INN.Text = reader["INN"].ToString();
-                    RegionPledgee.Text = reader["Region"].ToString();
-                    mail.Text = reader["E-mail"].ToString();                   
+                    reader.Read();
+                    if (reader.HasRows)
+                    {
+                        NameFull.Text = reader["NameFull"].ToString();
+                        OGRN.Text = reader["OGRN"].ToString();
+                        INN.Text = reader["INN"].ToString();
+                        RegionPledgee.Text = reader["Region"].ToString();
+                        mail.Text = reader["E-mail"].ToString();
+                    }
                 }
             }
 
         }
-
-        async void LoadComboBoxRegion()
+            async void LoadComboBoxRegion()
         {
             using (MySqlConnection connection = new MySqlConnection(Check.connectionString))  //создаем объект подключения к mysql
             {
@@ -58,15 +65,16 @@ namespace WpfApp3
                     connection.Open();
                     MySqlCommand SELECT = new MySqlCommand("SELECT Region FROM Regions", connection);
 
-                    DbDataReader reader = await SELECT.ExecuteReaderAsync(); // получаем из БД регионы
+                    using (DbDataReader reader = await SELECT.ExecuteReaderAsync())
+                    {// получаем из БД регионы
 
-                    while (reader.Read())
-                    {
-                        Region_list.Add(reader["Region"].ToString());    // записываем регионы в список
+                        while (reader.Read())
+                        {
+                            Region_list.Add(reader["Region"].ToString());    // записываем регионы в список
 
+                        }
+                        Region_list.Sort();
                     }
-                    Region_list.Sort();
-                    reader.Close();
 
 
                     RegionPledgee.ItemsSource = Region_list;

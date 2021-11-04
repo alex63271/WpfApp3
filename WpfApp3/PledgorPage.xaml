@@ -56,7 +56,7 @@
             <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="8"  Content="Регион" HorizontalAlignment="Right" />
             <Label Style="{DynamicResource LabelStyle}" VerticalAlignment="Center" Grid.Row="10"  Content="Серия и номер паспорта" HorizontalAlignment="Right" />
 
-            <TextBox Text="{Binding Path = Last}" Style="{DynamicResource TextStyle}"  Grid.Column="1"  x:Name="Last" />
+            <TextBox  Style="{DynamicResource TextStyle}"  Grid.Column="1"  x:Name="Last" />
             <TextBox Style="{DynamicResource TextStyle}" Grid.Row="2" Grid.Column="1"  x:Name="First" />
             <TextBox Style="{DynamicResource TextStyle}" Grid.Row="4" Grid.Column="1"   x:Name="Middle" />
             <DatePicker Style="{DynamicResource PikerStyle}" Grid.Row="6" Grid.Column="1"   x:Name="BirthDate" SelectedDate="2000-12-31"  />

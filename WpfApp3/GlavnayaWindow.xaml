@@ -8,6 +8,10 @@
         Title="Регистрация уведомлений о залоге (Тестовая среда)"
         WindowStartupLocation="CenterScreen"
        >
+    <Window.CommandBindings>
+        <CommandBinding Command="local:WindowCommands.CopyPackageid" Executed="Copy_Executed"/>
+    </Window.CommandBindings>
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -28,7 +32,7 @@
             </MenuItem>
         </Menu>
 
-        <DataGrid  Margin="5 25 5 0" x:Name="h1" ColumnWidth="*" CanUserAddRows="False"  IsReadOnly="True" RowBackground="White"  HeadersVisibility="Column" AutoGenerateColumns="False"  AlternatingRowBackground="#ebebeb" >
+        <DataGrid  Margin="5 25 5 0" x:Name="h1" ColumnWidth="*" CanUserAddRows="False"  IsReadOnly="True" RowBackground="White"  HeadersVisibility="Column" AutoGenerateColumns="False" AlternatingRowBackground="#ebebeb" >
             <DataGrid.Columns >
                 <DataGridTextColumn x:Name="st1" Header="Тип уведомления" Binding= "{Binding TypeNotification}"  />
                 <!--привязка к ФИО из sql-запроса -->
@@ -47,7 +51,7 @@
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Копировать рег. номер пакета" Command="Copy" CommandTarget="{Binding ElementName=txtBox}"/>
+                    <MenuItem Header="Копировать рег. номер пакета" Command="local:WindowCommands.CopyPackageid" />
                     <MenuItem Header="Скачать свидетельсвто" />
                 </ContextMenu>
             </DataGrid.ContextMenu>

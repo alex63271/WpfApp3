@@ -52,15 +52,16 @@ namespace WpfApp3
                     connection.Open();
                     MySqlCommand SELECT = new MySqlCommand("SELECT Region FROM Regions", connection);
 
-                    DbDataReader reader = await SELECT.ExecuteReaderAsync(); // получаем из БД регионы
+                    using (DbDataReader reader = await SELECT.ExecuteReaderAsync())
+                    { // получаем из БД регионы
 
-                    while (reader.Read())
-                    {
-                        Region_list.Add(reader["Region"].ToString());    // записываем регионы в список
+                        while (reader.Read())
+                        {
+                            Region_list.Add(reader["Region"].ToString());    // записываем регионы в список
 
+                        }
+                        Region_list.Sort();
                     }
-                    Region_list.Sort();
-                    reader.Close();
 
 
                     AplicantRegion.ItemsSource = Region_list;

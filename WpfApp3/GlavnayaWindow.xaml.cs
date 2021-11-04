@@ -25,6 +25,20 @@ namespace WpfApp3
     /// <summary>
     /// Логика взаимодействия для GlavnayaWindow.xaml
     /// </summary>
+    /// 
+
+    public class WindowCommands
+    {
+        static WindowCommands()
+        {
+            CopyPackageid = new RoutedCommand("CopyPackageid", typeof(GlavnayaWindow));
+        }
+        public static RoutedCommand CopyPackageid { get; set; }
+    }
+
+   
+
+
     public partial class GlavnayaWindow : Window
     {
         public GlavnayaWindow()
@@ -33,7 +47,38 @@ namespace WpfApp3
             UpdateDataGrid();
         }
 
+        private async void Copy_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            
+            using (MySqlConnection connection = new MySqlConnection(Check.connectionString))  //создаем объект подключения к mysql
+            {
 
+                using (connection)
+                {                  
+
+                    connection.Open();
+                    MySqlCommand SELECT = new MySqlCommand(Check.sql, connection);
+
+                    using (DbDataReader reader = await SELECT.ExecuteReaderAsync())
+                    {
+                        
+                        for (int i=0; i<h1.Items.IndexOf(h1.SelectedItem); i++)
+                        {
+                            reader.Read();
+                        }
+                        reader.Read();//если цикл не выполнялся, значит индекс 0
+                        MessageBox.Show(reader["Packageid"].ToString());
+
+                        Clipboard.SetText(reader["Packageid"].ToString());     // записываем Packageid в буфер обмена
+
+
+                    }
+
+
+                }
+            }
+
+        }
 
         public void UpdateDataGrid()
         {
@@ -84,14 +129,15 @@ namespace WpfApp3
                     connection.Open();
                     MySqlCommand SELECT = new MySqlCommand("SELECT Packageid FROM notification WHERE STATUS NOT IN ('FAULT', 'RESULT (зарегистрировано)', 'RESULT (отказ в регистрации)', 'Черновик')", connection);
 
-                    DbDataReader reader = await SELECT.ExecuteReaderAsync(); // получаем из БД список не обработанных пакетов
+                    using (DbDataReader reader = await SELECT.ExecuteReaderAsync())
+                    { // получаем из БД список не обработанных пакетов
 
-                    while (reader.Read())
-                    {
-                        packageid_list.Add(reader["Packageid"].ToString());    // записываем пакеты в коллекцию
+                        while (reader.Read())
+                        {
+                            packageid_list.Add(reader["Packageid"].ToString());    // записываем пакеты в коллекцию
 
+                        }
                     }
-                    reader.Close();
 
 
                     foreach (string packageid in packageid_list)    //перебираем коллецию
@@ -174,15 +220,16 @@ namespace WpfApp3
                 }
 
                 //далее автоматом обновляем datagrid
-                using (MySqlDataAdapter adapter = new MySqlDataAdapter(Check.sql, connection))    //создаем адаптер из подключения mysql для заполнения кэша dataset
-                {
-                    using (DataSet ds = new DataSet())  //создаем объект - кэш для хранения данных из БД
-                    {
-                        await adapter.FillAsync(ds);
-                        h1.ItemsSource = ds.Tables[0].DefaultView;
-                    }
+                //using (MySqlDataAdapter adapter = new MySqlDataAdapter(Check.sql, connection))    //создаем адаптер из подключения mysql для заполнения кэша dataset
+                //{
+                //    using (DataSet ds = new DataSet())  //создаем объект - кэш для хранения данных из БД
+                //    {
+                //        await adapter.FillAsync(ds);
+                //        h1.ItemsSource = ds.Tables[0].DefaultView;
+                //    }
 
-                }
+                //}
+                UpdateDataGrid();
             }
 
         }
@@ -192,5 +239,7 @@ namespace WpfApp3
             SettingsWindow2 Settings = new SettingsWindow2();
             Settings.Show();
         }
+
+        
     }
 }

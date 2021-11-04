@@ -18,6 +18,8 @@ namespace WpfApp3
     { 
         public MainWindow()
         {
+            //создаем папку temp
+            Directory.CreateDirectory(Check.Temp);
             FileInfo conf = new FileInfo("conf.xml");
             if (conf.Exists)
             {

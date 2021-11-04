@@ -16,7 +16,7 @@ namespace WpfApp3
     {
         // Если методы возвращают True - значит создаем запись в таблице. Если False - значит в таблице уже есть такая запись.
 
-
+        public static string Temp = "Temp/"; // папка для временных файлов
         public static int HashPledgor;
         public static int HashPledgee;
         public static int HashContract;
@@ -28,7 +28,7 @@ namespace WpfApp3
         public static int port;
         public static string DBName;
         public static string connectionString;// = "server=" + AdressMysql + ";user id=" + login + ";persistsecurityinfo=True;database=" + DBName + ";allowuservariables=True;Password="+ password+ "port="+ port;
-        public static string sql = "SELECT CONCAT(Person.Last , ' ', Person.First, ' ',Person.Middle) AS ФИО, DATE_FORMAT(notification.DataTime, '%d.%m.%Y  %H.%i') as DataTime, notification.NumberNotification, Contracts.Number, notification.Status, notification.TypeNotification  FROM notification LEFT OUTER  join Person ON Person.Hash = notification.Pledgor LEFT OUTER join Contracts ON Contracts.Hash = notification.PledgeContract;";  // sql-запрос для создания кэша таблицы notification
+        public static string sql = "SELECT Packageid, CONCAT(Person.Last , ' ', Person.First, ' ',Person.Middle) AS ФИО, DATE_FORMAT(notification.DataTime, '%d.%m.%Y  %H.%i') as DataTime, notification.NumberNotification, Contracts.Number, notification.Status, notification.TypeNotification  FROM notification LEFT OUTER  join Person ON Person.Hash = notification.Pledgor LEFT OUTER join Contracts ON Contracts.Hash = notification.PledgeContract;";  // sql-запрос для создания кэша таблицы notification
 
 
         public static byte[] array;
